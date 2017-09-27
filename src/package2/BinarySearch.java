@@ -5,9 +5,10 @@ import java.util.Arrays;
 public class BinarySearch {
 
     public static void main(String[] args) {
-        int[] ints = {5,6,7,8,9,10,1,2,3,4};
+        int[] ints = {5, 6, 7, 8, 9, 10, 1, 2, 3, 4};
 
-        System.out.println(isValuePresent(ints, 2));
+        System.out.println(isValuePresent(ints, 2)); //true
+        System.out.println(isValuePresent(ints, 11)); //false
     }
 
 
@@ -15,14 +16,25 @@ public class BinarySearch {
 
         Arrays.sort(source); //must be sorted
 
-        for (int i = 0; i <= source.length - 1; i++) {
+        int low = 0;
+        int high = source.length - 1;
 
-            System.out.println("check "+source[i]);
 
-            if(source[i] == value)
-                return true;
+        while (low <= high) {
+            int median = (low + high) / 2;
+
+            if (source[median] < value) {
+                low = median + 1;
+            } else {
+                high = median - 1;
+            }
         }
 
-        return false;
+
+        if (low == source.length || source[low] != value) {
+            return false;
+        }
+
+        return true;
     }
 }
